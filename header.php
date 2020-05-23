@@ -28,12 +28,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="menu-item important-text border-right-1">
-                            <a href="all-cars.php">Главная</a>
+                            <a href="index.php">Главная</a>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="menu-item important-text border-right-1">
-                            <a href="">Машины</a>
+                            <a href="all-cars.php">Машины</a>
                         </div>
                     </div>
                     <div class="col-md-4">

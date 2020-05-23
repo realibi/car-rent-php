@@ -110,6 +110,89 @@ a:hover{
     background-color: #5d4940;
 }
 
-table{
+.signinBlock{
+    width: 100%;
+    height: 490px;
+    box-shadow: 0 0 3px;
+}
+
+.searchBlock{
+    width: 100%;
+    height: 170px;
+    box-shadow: 0 0 3px;
+}
+
+.tac{
     text-align: center;
+}
+
+.signinBlock button{
+    background-color: white;
+    border: 1px solid white;
+    color: #a2857d;
+    font-weight: 700;
+    padding: 0px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.signinBlock button:hover{
+    background-color: white;
+    border: 1px solid white;
+    color: #5d4940;
+    font-weight: 700;
+    padding: 0px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.signinBlock input{
+    border: 1px solid white;
+    border-bottom: 1px solid grey;
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+}
+
+.signinBlock input::placeholder{
+    font-size: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.main-text{
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+}
+
+.searchBlock input{
+    border: 1px solid white;
+    border-bottom: 1px solid grey;
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+}
+
+.searchBlock input::placeholder{
+    font-size: 12px;
+    text-align: left;
+    font-weight: 600;
+    text-align: center;
+}
+
+.searchBlock button{
+    background-color: white;
+    border: 1px solid white;
+    color: #a2857d;
+    font-weight: 700;
+    padding: 0px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.searchBlock button:hover{
+    background-color: white;
+    border: 1px solid white;
+    color: #5d4940;
+    font-weight: 700;
+    padding: 0px;
+    font-family: 'Roboto Slab', serif;
 }

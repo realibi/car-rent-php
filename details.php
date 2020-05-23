@@ -30,6 +30,9 @@
         <p class="regular-text right"><?php echo $data["milleage"]?></p>
         <p class="important-text">Статус:</p> 
         <p class="regular-text right"><?php echo $data["status"]?></p>
+    </div>
+    <div class="col-12">
+        <br>
         <button class="button">Оформить аренду</button>
     </div>
 <?php
