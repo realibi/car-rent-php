@@ -1,0 +1,115 @@
+body{
+    
+}
+
+.img-block{
+    border: 4px solid #5d4940;
+}
+
+.title-text{
+    font-family: 'Russo One', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #5d4940;
+}
+
+.important-text{
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #5d4940;
+}
+
+.regular-text{
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: #a2857d;
+}
+
+.center{
+    text-align: center;
+}
+
+.right{
+    text-align: right;
+}
+
+.green-text{
+    color: green;
+}
+
+.site-name-top-text{
+    font-family: 'Russo One', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: #eacec0;
+}
+
+.site-name-additional-text{
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #a2857d;
+}
+
+.header{
+    padding-top: 10px;
+    background-color: #5d4940;
+}
+
+.header-menu{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.menu-item{
+    width: 100%;
+    text-align: center;
+    padding-right: 15px;
+}
+
+.menu-item:hover{
+    width: 100%;
+    text-align: center;
+    padding-right: 15px;
+}
+
+a{
+    color: #eacec0;
+}
+
+a:hover{
+    color: #eacec0;
+    text-decoration: none;
+
+}
+
+.border-right-1{
+    border-right: 3px solid #33261fb2;
+}
+
+.button{
+    background-color: #5d4940;
+    border: 1px solid #5d4940;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+    color: #eacec0;
+    font-family: 'Roboto Slab', serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer{
+    height: 100px;
+    width: 100%;
+    background-color: #5d4940;
+}
+
+table{
+    text-align: center;
+}
