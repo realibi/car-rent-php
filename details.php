@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("header.php"); 
     $conn = mysqli_connect('127.0.0.1:3306', 'root', '', 'car_rent_db')
     or die("Connection error");
@@ -22,25 +23,62 @@
         </div>
     </div>
     <div class="col-md-6 col-xs-12">
-        <p class="important-text">Модель:</p> 
-        <p class="regular-text right"><?php echo $data["model"]?></p>
-        <p class="important-text">Год выпуска:</p> 
-        <p class="regular-text right"><?php echo $data["year"]?></p>
-        <p class="important-text">Пробег:</p> 
-        <p class="regular-text right"><?php echo $data["milleage"]?></p>
-        <p class="important-text">Статус:</p> 
-        <p class="regular-text right"><?php echo $data["status"]?></p>
-    </div>
-    <div class="col-12">
-        <br>
-        <button class="button">Оформить аренду</button>
+        <div class="info">
+            <div class="important-text">Модель:</div> 
+            <div class="regular-text right"><?php echo $data["model"]?></div>
+        </div><br>
+        <div class="info">
+            <div class="important-text">Год выпуска:</div> 
+            <div class="regular-text right"><?php echo $data["year"]?></div>
+        </div><br>
+        <div class="info">
+            <div class="important-text">Пробег:</div> 
+            <div class="regular-text right"><?php echo $data["milleage"]?> км</div>
+        </div><br>
+        <div class="info">
+            <div class="important-text">Статус:</div> 
+            <div class="regular-text right"><?php echo $data["status"]?></div>
+        </div><br>
+        <div class="info">
+            <div class="important-text">Цена:</div> 
+            <div class="regular-text right"><?php echo $data["price"]?>/сутки</div>
+        </div><br><br><br>
+        <?php
+            if($data["status"] != "свободна"){
+        ?>
+
+            <div class="important-text tac">На данный момент машина уже в аренде! Дождитесь, пока она освободится.</div>
+
+        <?php
+            }elseif($_SESSION["currentUserFullName"] != null){
+        ?>
+
+                <button class="button">
+                    <a class="buyButtonIndex" href="javascript:PopUpShow()">
+                        Оформить аренду на имя <?php echo $_SESSION["currentUserFullName"] ?>
+                    </a>
+                </button>
+                <!-- <a class="buyButtonIndex" href="javascript:PopUpShow()">ORDER A CALL FROM CONSULTANT</a> -->
+        
+        <?php
+            }elseif($_SESSION["currentUserFullName"] == null){
+        ?>
+
+                <div class="important-text tac">Авторизуйтесь, чтобы оформить аренду этого авто!</div>
+        
+        <?php
+            }
+        ?>
     </div>
 <?php
     }
     else{
 ?>
-    <h1>error</h1>
+    <h1>error!</h1>
 <?php
     }
+?>
+
+<?php
     include("footer.php"); 
 ?>
