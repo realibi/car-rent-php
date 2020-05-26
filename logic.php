@@ -5,8 +5,11 @@
 
     if($_POST["registrationForm"]){
         register();
-    }elseif($_POST["logInForm"]){
-        logIn();
+    }
+    elseif($_POST["logInForm"]){
+        $login = $_POST["login"];
+        $password = $_POST["password"];
+        logIn($login, $password);
     }
     elseif($_POST["logout"]){
         session_destroy();
@@ -15,14 +18,38 @@
     elseif($_POST["newRent"]){
         createRent();
     }
+    elseif($_POST["addCar"]){
+        addCar();
+    }
+
+    function addCar(){
+        $model = $_POST["model"];
+        $year = $_POST["year"];
+        $milleage = $_POST["milleage"];
+        $price = $_POST["price"];
+
+        $uploaddir = 'E:/ospanel/ospanel/domains/car-rent/img/'; //physical address of uploads directory
+
+        $uploadfile = $uploaddir . basename($_FILES['image']['name']);
+        move_uploaded_file($_FILES['image']['name'], $uploadfile)
+
+        $imgSrc = "img/" . $_FILES['image']['tmp_name'];
+
+        $sql = "INSERT INTO autos(model, img_src, year, milleage, status, number, owner_id, price) VALUES('$model', )";
+    }
 
     function createRent(){
         global $conn;
         $autoId = $_POST["autoId"];
+        $days = $_POST["days"];
+        $offsetDays = new DateInterval('P' . $days . 'D');
         $currentDateTime = date('Y-m-d');
-        $sql = "UPDATE autos SET status='занята', rent_start_time=$currentDateTime WHERE id=$autoId";
+        $curDate = new DateTime($currentDateTime);
+        $offsetDate = $curDate->add($offsetDays);
+        $offsetDate = $offsetDate->format('Y-m-d');
+        $ownerId = $_SESSION["currentUserId"];
+        $sql = "UPDATE autos SET status='занята', rent_start_time='$currentDateTime', rent_end_time='$offsetDate', owner_id=$ownerId WHERE id=$autoId";
         if($conn->query($sql)){
-
             header('Location: all-cars.php');
         }else{
             header('Location: index.php');
@@ -39,19 +66,14 @@
         $sql = "insert into users(fullname, login, password) VALUES('$fullname', '$login', '$password')";
 
         if($conn->query($sql)){
-            $_SESSION["currentUserLogin"] = $data["login"];
-            $_SESSION["currentUserFullName"] = $data["fullname"];
-            header('Location: index.php');
+            logIn($login, $password);
         }else{
             header('Location: index.php');
         }
     }
 
-    function logIn(){
+    function logIn($login, $password){
         global $conn;
-
-        $login = $_POST["login"];
-        $password = $_POST["password"];
 
         $sql = "SELECT * FROM users where login='$login' and password='$password'";
         $data = mysqli_fetch_assoc($conn->query($sql));
@@ -59,6 +81,7 @@
         if($data != null){
             $_SESSION["currentUserLogin"] = $data["login"];
             $_SESSION["currentUserFullName"] = $data["fullname"];
+            $_SESSION["currentUserId"] = $data["id"];
             header('Location: index.php');
         }else{
             header('Location: index.php');

@@ -15,17 +15,16 @@
                     <div class="regular-text right white"><?php echo $data["milleage"] ?> км</div><br>
                     <div class="regular-text left white">Цена:</div>
                     <div class="regular-text right white"><?php echo $data["price"] ?>/сутки</div><br><br>
-                    <div class="regular-text white">Кол-во дней аренды:</div>
-                    <input type="number" name="days"><br><br>
-                    <div class="regular-text white">Особые пожелания:</div>
-                    <textarea rows="2"></textarea>
-                </div>
-                <div class="col-12 tac">
-                    <br>
                     <form action="logic.php" method="post">
+                        <div class="regular-text white">Кол-во дней аренды:</div>
+                        <input type="number" name="days"><br><br>
+                        <div class="regular-text white">Особые пожелания:</div>
+                        <textarea rows="2"></textarea>
+                        <br>
                         <input hidden type="text" name="autoId" value="<?php echo $data["id"] ?>">
                         <input hidden type="text" name="newRent" value="a">
-                        <button type="submit" class="button">Оформить аренду</button>
+                        <button type="submit" class="button">Оформить аренду</button><br>
+                        <a class="okButton" href="javascript:PopUpHide()">Отмена</a>
                     </form>
                 </div>
                 </div>
@@ -33,6 +32,8 @@
         </div>
 
         <script src="js/popup.js"></script>
+
+        <br><br><br>
 
         <!-- <div class="footer">
             <br>

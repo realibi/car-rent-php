@@ -41,12 +41,12 @@
                             <?php
                                 if($_SESSION["currentUserLogin"]){ 
                             ?>
-                                <a href="">Личный кабинет</a>
+                                <a href="personal-page.php">Личный кабинет</a>
                             <?php
                                 }
                                 else{ 
                             ?>
-                                <a href="">Вход</a>
+                                <a href="index.php">Вход</a>
                             <?php
                                 } 
                             ?>
