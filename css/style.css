@@ -9,7 +9,6 @@ body{
 .title-text{
     font-family: 'Russo One', sans-serif;
     width: 100%;
-    text-align: center;
     font-size: 30px;
     margin-top: 40px;
     margin-bottom: 40px;
@@ -164,10 +163,20 @@ a:hover{
 
 .main-text{
     font-family: 'Roboto Slab', serif;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .searchBlock input{
+    border: 1px solid white;
+    border-bottom: 1px solid grey;
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+}
+
+.bordered-input{
     border: 1px solid white;
     border-bottom: 1px solid grey;
     margin-top: 10px;
@@ -196,6 +205,15 @@ a:hover{
     background-color: white;
     border: 1px solid white;
     color: #5d4940;
+    font-weight: 700;
+    padding: 0px;
+    font-family: 'Roboto Slab', serif;
+}
+
+.bordered-button{
+    background-color: white;
+    border: 1px solid white;
+    color: #a2857d;
     font-weight: 700;
     padding: 0px;
     font-family: 'Roboto Slab', serif;

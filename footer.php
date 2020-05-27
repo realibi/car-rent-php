@@ -35,7 +35,7 @@
 
         <br><br><br>
 
-        <!-- <div class="footer">
+        <div class="footer">
             <br>
             <div class="container">
                 <div class="row">
@@ -46,7 +46,7 @@
                     <div class="col-4"></div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </body>
 
 </html>

@@ -27,15 +27,57 @@
         $year = $_POST["year"];
         $milleage = $_POST["milleage"];
         $price = $_POST["price"];
+        $number = $_POST["number"];
 
-        $uploaddir = 'E:/ospanel/ospanel/domains/car-rent/img/'; //physical address of uploads directory
+        $target_dir = "E:/OSPanel/OSPanel/domains/car-rent/img/"; //ПУТЬ ДЛЯ СОХРАНЕНИЯ ФОТО
 
-        $uploadfile = $uploaddir . basename($_FILES['image']['name']);
-        move_uploaded_file($_FILES['image']['name'], $uploadfile)
+        $uniqidForImageName = uniqid();
+        $target_file = $target_dir . $uniqidForImageName . basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
-        $imgSrc = "img/" . $_FILES['image']['tmp_name'];
+        if(isset($_POST["submit"])) {
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            if($check !== false) {
+               // echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+               // echo "File is not an image.";
+                $uploadOk = 0;
+            }
+        }
 
-        $sql = "INSERT INTO autos(model, img_src, year, milleage, status, number, owner_id, price) VALUES('$model', )";
+        if (file_exists($target_file)) {
+            //echo "Sorry, file already exists.";
+            $uploadOk = 0;
+        }
+
+        if ($_FILES["image"]["size"] > 50000000) {
+            //echo "Sorry, your file is too large.";
+            $uploadOk = 0;
+        }
+
+        if ($uploadOk == 0) {
+            //echo "Sorry, your file was not uploaded.";
+        } else {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+               // echo "The file ". basename( $_FILES["image"]["name"]). " has been uploaded.";
+            } else {
+                //echo "Sorry, there was an error uploading your file.";
+            }
+        }
+
+        $imageUrl = "img/" . $uniqidForImageName . basename($_FILES["image"]["name"]);
+        $ownerId = $_SESSION["currentUserId"];
+
+        $sql = "INSERT INTO autos(model, img_src, year, milleage, status, number, owner_id, price) VALUES('$model', '$imageUrl', $year, $milleage, 'свободна', '$number', $ownerId, $price)";
+        global $conn;
+
+        if($conn->query($sql)){
+            header('Location: all-cars.php');
+        }else{
+            header('Location: personal-page.php');
+        }
     }
 
     function createRent(){

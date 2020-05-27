@@ -5,35 +5,45 @@
 
     $currentUserId = $_SESSION["currentUserId"];
 
-    $sql = "SELECT * FROM autos WHERE owner_id=$currentUserId";
+    $sql = "SELECT * FROM autos WHERE owner_id=$currentUserId AND status='занята'";
     $result = mysqli_query($conn, $sql);
 
     include("header.php");
 ?>
 
-<div class="col-12 tac">
-    <div class="title-text">Добавить свою машину</div>
+<div class="title-text">Добавить свою машину</div>
+
+<div class="col-12">
+    
     <br>
     <form action="logic.php" method="post" enctype="multipart/form-data">
 
-        <div class="important-text">Фотография:</div><br><br>
-        <div class="regular-text"><input type="file" name="image"></div><br><br><br>
+        
 
-        <div class="important-text">Модель</div><br><br>
-        <div class="regular-text"><input type="text" name="model"></div><br><br><br>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="important-text">Фотография:</div><br><br>
+                <div class="regular-text"><input type="file" name="image"></div><br><br><br>
+                <div class="important-text">Модель</div><br><br>
+                <div class="regular-text"><input type="text" name="model"></div><br><br><br>
     
-        <div class="important-text">Год выпуска</div><br><br>
-        <div class="regular-text"><input type="date" name="year"></div><br><br><br>
+                <div class="important-text">Год выпуска</div><br><br>
+                <div class="regular-text"><input type="number" name="year"></div><br><br><br>
+                <button type="submit" class="button w-50 tac">Готово</button>
+            </div>
+            <div class="col-md-6 col-xs-12">
+            <div class="important-text">Пробег</div><br><br>
+            <div class="regular-text"><input type="number" name="milleage"></div><br><br><br>
 
-        <div class="important-text">Пробег</div><br><br>
-        <div class="regular-text"><input type="number" name="milleage"></div><br><br><br>
+            <div class="important-text">Цена за сутки</div><br><br>
+            <div class="regular-text"><input type="number" name="price"></div><br><br><br>
 
-        <div class="important-text">Цена за сутки</div><br><br>
-        <div class="regular-text"><input type="number" name="price"></div><br><br><br>
+            <div class="important-text">Гос. номер автомобиля</div><br><br>
+            <div class="regular-text"><input type="text" name="number"></div><br><br><br>
+            </div>
+        </div>
 
         <input hidden type="text" name="addCar" value="a">
-
-        <button type="submit" class="button w-50 tac">Готово</button>
     </form>
 
     <br><br><br><br>
