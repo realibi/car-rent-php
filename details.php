@@ -79,6 +79,12 @@
     }
 ?>
 
+<style>
+    .footer{
+        position: absolute;
+    }
+</style>
+
 <?php
     include("footer.php"); 
 ?>

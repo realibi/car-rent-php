@@ -16,6 +16,7 @@
                     <div class="regular-text left white">Цена:</div>
                     <div class="regular-text right white"><?php echo $data["price"] ?>/сутки</div><br><br>
                     <form action="logic.php" method="post">
+                        <input hidden type="text" name="model" value="<?php echo $data["model"] ?>">
                         <div class="regular-text white">Кол-во дней аренды:</div>
                         <input type="number" name="days"><br><br>
                         <div class="regular-text white">Особые пожелания:</div>

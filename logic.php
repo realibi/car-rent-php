@@ -16,10 +16,53 @@
         header('Location: index.php');
     }
     elseif($_POST["newRent"]){
-        createRent();
+        createOrder();
     }
     elseif($_POST["addCar"]){
         addCar();
+    }
+    elseif($_POST["acceptOrder"]){
+        acceptOrder();
+    }
+    elseif($_POST["declineOrder"]){
+        declineOrder();
+    }
+
+    function declineOrder(){
+        global $conn;
+        $orderId = $_POST["orderId"];
+        $userId = $_POST["userId"];
+        $rentStartTime = $_POST["rentStartTime"];
+        $rentEndTime = $_POST["rentEndTime"];
+        $autoId = $_POST["autoId"];
+
+        $sqlToOrders = "DELETE FROM orders WHERE id=$orderId";
+        if($conn->query($sqlToOrders)){
+            header('Location: personal-page.php');
+        }else{
+            header('Location: personal-page.php');
+        }
+    }
+
+    function acceptOrder(){
+        global $conn;
+        $orderId = $_POST["orderId"];
+        $userId = $_POST["userId"];
+        $rentStartTime = $_POST["rentStartTime"];
+        $rentEndTime = $_POST["rentEndTime"];
+        $autoId = $_POST["autoId"];
+        $sqlToOrders = "UPDATE orders SET accepted=1 WHERE id=$orderId";
+        $sqlToAutos = "UPDATE autos SET owner_id=$userId, rent_start_time='$rentStartTime', rent_end_time='$rentEndTime', status='занята' WHERE id=$autoId";
+
+        if($conn->query($sqlToOrders)){
+            if($conn->query($sqlToAutos)){
+                header('Location: personal-page.php');
+            }else{
+                echo "error";
+            }
+        }else{
+            echo "error";
+        }
     }
 
     function addCar(){
@@ -80,9 +123,12 @@
         }
     }
 
-    function createRent(){
+    
+
+    function createOrder(){
         global $conn;
         $autoId = $_POST["autoId"];
+        $model = $_POST["model"];
         $days = $_POST["days"];
         $offsetDays = new DateInterval('P' . $days . 'D');
         $currentDateTime = date('Y-m-d');
@@ -90,7 +136,10 @@
         $offsetDate = $curDate->add($offsetDays);
         $offsetDate = $offsetDate->format('Y-m-d');
         $ownerId = $_SESSION["currentUserId"];
-        $sql = "UPDATE autos SET status='занята', rent_start_time='$currentDateTime', rent_end_time='$offsetDate', owner_id=$ownerId WHERE id=$autoId";
+        $currentUserId = $_SESSION["currentUserId"];
+        $currentUserFullName = $_SESSION["currentUserFullName"];
+        //$sql = "UPDATE autos SET status='занята', rent_start_time='$currentDateTime', rent_end_time='$offsetDate', owner_id=$ownerId WHERE id=$autoId";
+        $sql = "INSERT INTO orders(auto_id, auto_model, user_id, user_fullname, rent_start_time, rent_end_time) VALUES($autoId, '$model', $currentUserId, '$currentUserFullName', '$currentDateTime', '$offsetDate')";
         if($conn->query($sql)){
             header('Location: all-cars.php');
         }else{
@@ -105,12 +154,21 @@
         $login = $_POST["login"];
         $password = $_POST["password"];
 
-        $sql = "insert into users(fullname, login, password) VALUES('$fullname', '$login', '$password')";
+        $sqlToCheck = "SELECT * FROM users WHERE login='$login'";
 
-        if($conn->query($sql)){
-            logIn($login, $password);
-        }else{
+        $sql = "insert into users(fullname, login, password, admin) VALUES('$fullname', '$login', '$password', 0)";
+        
+        $result = mysqli_query($conn, $sqlToCheck);
+        $data = $result->fetch_assoc();
+
+        if($data["id"]){
             header('Location: index.php');
+        }else{
+            if($conn->query($sql)){
+                logIn($login, $password);
+            }else{
+                header('Location: index.php');
+            }
         }
     }
 
@@ -124,6 +182,7 @@
             $_SESSION["currentUserLogin"] = $data["login"];
             $_SESSION["currentUserFullName"] = $data["fullname"];
             $_SESSION["currentUserId"] = $data["id"];
+            $_SESSION["currentUserIsAdmin"] = $data["admin"];
             header('Location: index.php');
         }else{
             header('Location: index.php');

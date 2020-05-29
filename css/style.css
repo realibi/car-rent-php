@@ -1,5 +1,9 @@
 body{
-    
+    height: 100vh;
+}
+
+html{
+    height: 100vh;
 }
 
 .img-block{
@@ -111,6 +115,8 @@ a:hover{
     height: 100px;
     width: 100%;
     background-color: #5d4940;
+    bottom: 0;
+    position: static;
 }
 
 .signinBlock{
@@ -312,4 +318,20 @@ a:hover{
     padding: 0px;
     font-family: 'Roboto Slab', serif;
     padding-left: 3px;
+}
+
+.ordersTable{
+    border: 5px solid #5d4940;
+    text-align: center;
+}
+
+.ordersTable td{
+    padding: 10px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+}
+.ordersTable th{
+    font-weight: 700;
+    font-size: 16px;
+    color: #5d4940;
 }

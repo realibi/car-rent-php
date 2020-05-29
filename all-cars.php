@@ -32,7 +32,6 @@
 
     <div class="col-12">
         <div class="title-text">Все машины</div>
-        <br>
     </div>
     <div class="col-12">
         <br>
